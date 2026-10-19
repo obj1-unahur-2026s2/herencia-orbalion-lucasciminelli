@@ -1,0 +1,31 @@
+import orbalion.*
+
+describe "Tests checkpoint 1"{
+
+    test "Test 1: Validar rol de entrenador" {
+        assert.throwsExceptionWithMessage(
+            "Rol no homologado por la FOZ",
+            { new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = "Capitan") }
+        )
+    }
+
+    test "Test 2:equipo lumínico con radiación > 5000 y sin tecnologías activas → su energía total es su energía base "{
+        const equipoLuminico = new EquipoLuminico(nombre= "Equipo Luminico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = false) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeRadiacionCapturada=5001, cristalesSolaresAmplificadores=[]);
+        assert.equals(1000, equipoLuminico.energiaTotal());
+    }
+
+    test "Test 3: equipo lumínico con radiación < 5000 → obtiene el bono del 10%"{
+        const equipoLuminico = new EquipoLuminico(nombre= "Equipo Luminico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = false) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeRadiacionCapturada=4999, cristalesSolaresAmplificadores=[]);
+        assert.equals(1100, equipoLuminico.energiaTotal());
+    }
+
+    test "Test 4: Un equipo sintético con 6 módulos → aplica correctamente la penalización del 20%"{
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = false) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=6, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.equals(800, equipoSintetico.energiaTotal());
+    }
+
+    test "Test 5: Un equipo sintético 4 módulos y 2 tecnologías complementarias → suma correctamente los valores energéticos."{
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=4, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.equals(1800, equipoSintetico.energiaTotal());
+    }
+}
