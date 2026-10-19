@@ -11,6 +11,7 @@ class Equipo{
     method entrenador() = entrenador;
     method tecnologiasComplementariasActivas() = tecnologiasComplementarias.filter({tecnologia => tecnologia.activa()});
     method energiaTotal() = nivelDeEnergiaBase + self.tecnologiasComplementariasActivas().sum({tecnologia => tecnologia.valorEnergetico()});
+    method esDePrestigioUniversal()
 }
 
 class EquipoLuminico inherits Equipo{
@@ -25,6 +26,11 @@ class EquipoLuminico inherits Equipo{
         } else{
             return super()
         }
+    }
+    override method esDePrestigioUniversal(){
+        return self.cristalesSolaresAmplificadores().size() >= 3 &&
+                self.entrenador().esEliteGalactico() &&
+                !self.tecnologiasComplementariasActivas().isEmpty()
     }
 
 }
@@ -45,7 +51,11 @@ class EquipoSintetico inherits Equipo{
             return super()
         }
     } 
-
+    override method esDePrestigioUniversal(){
+        return self.estaCertificadoComoUnidadEstableDeCompeticion() &&
+                self.cantidadDeModulosActivos() > 3 &&
+                self.tecnologiasComplementarias().all({ tecnologia => tecnologia.activa() })
+    }
    
 }
 class EquipoEterico inherits Equipo{

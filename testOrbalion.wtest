@@ -45,3 +45,49 @@ describe "Tests checkopint 2"{
         assert.that(entrenador.esEliteGalactico())
     }
 }
+
+describe "Tests checkpoint 3"{
+
+    test "Equipo lumínico con 3 cristales, entrenador de élite y una tecnología activa → es de prestigio universal"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoLuminico = new EquipoLuminico(nombre= "Equipo Luminico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeRadiacionCapturada=4999, cristalesSolaresAmplificadores=["Cristal 1", "Cristal 2", "Cristal 3"])
+        
+        assert.that(equipoLuminico.esDePrestigioUniversal())
+    }
+
+    test "Equipo sintético certificado con 4 módulos y todas las tecnologías activas → es de prestigio"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=4, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.that(equipoSintetico.esDePrestigioUniversal())
+    }
+
+    test "Equipo sintético certificado con 3 módulos y todas las tecnologías activas → no es de prestigio"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=3, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.notThat(equipoSintetico.esDePrestigioUniversal())
+    }
+    
+    test "Equipo sintético certificado con 2 módulos y todas las tecnologías activas → no es de prestigio"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=2, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.notThat(equipoSintetico.esDePrestigioUniversal())
+    }
+    test "Equipo sintético certificado con 4 módulos y no todas las tecnologías activas → no es de prestigio"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = false), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=4, estaCertificadoComoUnidadEstableDeCompeticion=true);
+        assert.notThat(equipoSintetico.esDePrestigioUniversal())
+    }
+     test "Equipo sintético no certificado con 4 módulos y todas las tecnologías activas → no es de prestigio"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoSintetico = new EquipoSintetico(nombre= "Equipo Sintetico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador= new Entrenador(cantidadCiclosSolaresDeExperiencia = 10, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 10, rol = estrategaCuantico), nivelDeProcesamientoCentral=10, cantidadDeModulosActivos=4, estaCertificadoComoUnidadEstableDeCompeticion=false);
+        assert.notThat(equipoSintetico.esDePrestigioUniversal())
+    }
+    
+
+    test "Equipo lumínico con 2 cristales, entrenador de élite y una tecnología activa → no es de prestigio universal"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoLuminico = new EquipoLuminico(nombre= "Equipo Luminico 1", nivelDeEnergiaBase=1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeRadiacionCapturada=4999, cristalesSolaresAmplificadores=["Cristal 1", "Cristal 2"])
+        
+        assert.notThat(equipoLuminico.esDePrestigioUniversal())
+    }
+}
