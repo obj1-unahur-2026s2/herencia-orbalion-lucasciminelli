@@ -64,6 +64,20 @@ class EquipoEterico inherits Equipo{
 
     method nivelDeFluctuacionDimensional() = nivelDeFluctuacionDimensional;
     method cantidadDePortalesEnergeticosAbiertos() = cantidadDePortalesEnergeticosAbiertos;
+
+    override method esDePrestigioUniversal(){
+        return self.nivelDeFluctuacionDimensional() > 75 &&
+                 self.cantidadDePortalesEnergeticosAbiertos() >= 2 &&
+                 self.tecnologiasComplementariasActivas().size() >= 2
+    }
+
+    override method energiaTotal(){
+        if(self.esDePrestigioUniversal()){
+            return super() * 1.15
+        } else{
+            return super()
+        }
+    }
 }
 
 class Entrenador{

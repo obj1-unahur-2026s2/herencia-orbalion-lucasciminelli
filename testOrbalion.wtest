@@ -91,3 +91,39 @@ describe "Tests checkpoint 3"{
         assert.notThat(equipoLuminico.esDePrestigioUniversal())
     }
 }
+
+describe "Tests checkpoint 4"{
+
+    test "Equipo etérico con 3 portales, fluctuación 80 y 2 tecnologías activas → es de prestigio universal"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoEterico = new EquipoEterico(nombre= "Equipo eterico 1", nivelDeEnergiaBase= 1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeFluctuacionDimensional = 80, cantidadDePortalesEnergeticosAbiertos = 3);
+
+        assert.that(equipoEterico.esDePrestigioUniversal())
+    }
+
+    test "Verificar que el incremento del 15% se aplica correctamente"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoEterico = new EquipoEterico(nombre= "Equipo eterico 1", nivelDeEnergiaBase= 1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeFluctuacionDimensional = 80, cantidadDePortalesEnergeticosAbiertos = 3);
+
+        assert.equals(2070, equipoEterico.energiaTotal())
+    }
+
+    test "Verificar que un equipo etérico que no cumple las condiciones **no** suma el 15%"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoEterico = new EquipoEterico(nombre= "Equipo eterico 1", nivelDeEnergiaBase= 1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeFluctuacionDimensional = 80, cantidadDePortalesEnergeticosAbiertos = 1);
+
+        assert.equals(1800, equipoEterico.energiaTotal())
+    }
+    test "Verificar que un equipo etérico que no cumple las condiciones **no** suma el 15% 2"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoEterico = new EquipoEterico(nombre= "Equipo eterico 1", nivelDeEnergiaBase= 1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeFluctuacionDimensional = 74, cantidadDePortalesEnergeticosAbiertos = 3);
+
+        assert.equals(1800, equipoEterico.energiaTotal())
+    }
+     test "Verificar que un equipo etérico que no cumple las condiciones **no** suma el 15% 3"{
+        const entrenadorEliteGalactica = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        const equipoEterico = new EquipoEterico(nombre= "Equipo eterico 1", nivelDeEnergiaBase= 1000, tecnologiasComplementarias = #{ new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 300, activa = true), new Tecnologia(nombre = "Núcleo gravitacional", valorEnergetico = 500, activa = true) }, entrenador=entrenadorEliteGalactica, nivelDeFluctuacionDimensional = 75, cantidadDePortalesEnergeticosAbiertos = 3);
+
+        assert.equals(1800, equipoEterico.energiaTotal())
+    }
+}
