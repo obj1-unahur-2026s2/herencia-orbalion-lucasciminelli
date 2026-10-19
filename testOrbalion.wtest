@@ -29,3 +29,19 @@ describe "Tests checkpoint 1"{
         assert.equals(1800, equipoSintetico.energiaTotal());
     }
 }
+
+describe "Tests checkopint 2"{
+
+    test "Estratega cuántico con 12 ciclos y precisión 90 → es de élite galáctica"{
+        const entrenador = new Entrenador(cantidadCiclosSolaresDeExperiencia = 12, estaEnSintoniaConSuEquipo = true, nivelDePrecisionEstrategica = 90, rol = estrategaCuantico);
+        assert.that(entrenador.esEliteGalactico())
+    }
+    test "Arquitecto de energía con 11 ciclos pero sin sintonía → no es de élite."{
+        const entrenador = new Entrenador(cantidadCiclosSolaresDeExperiencia = 11, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = arquitectoEnergia);
+        assert.notThat(entrenador.esEliteGalactico())
+    }
+    test "Guía mental con 15 ciclos → siempre es de élite."{
+        const entrenador = new Entrenador(cantidadCiclosSolaresDeExperiencia = 15, estaEnSintoniaConSuEquipo = false, nivelDePrecisionEstrategica = 90, rol = guiaMental);
+        assert.that(entrenador.esEliteGalactico())
+    }
+}

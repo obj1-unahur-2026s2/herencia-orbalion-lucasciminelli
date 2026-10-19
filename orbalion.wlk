@@ -61,6 +61,7 @@ class Entrenador{
     const estaEnSintoniaConSuEquipo;
     const nivelDePrecisionEstrategica;
     var rol;
+    
 
     method initialize(){
         self.validarRol(rol)
@@ -69,6 +70,7 @@ class Entrenador{
     method cantidadCiclosSolaresDeExperiencia() = cantidadCiclosSolaresDeExperiencia;
     method estaEnSintoniaConSuEquipo() = estaEnSintoniaConSuEquipo;
     method nivelDePrecisionEstrategica() = nivelDePrecisionEstrategica;
+    method esEliteGalactico() = self.cantidadCiclosSolaresDeExperiencia() > 10 && rol.cumpleCondicionDeElite(self)
 
     method asignarRol(nuevoRol){
          self.validarRol(nuevoRol)
@@ -99,12 +101,19 @@ class Tecnologia{
 }
 
 object estrategaCuantico{
+    method cumpleCondicionDeElite(entrenador){
+        return entrenador.nivelDePrecisionEstrategica() > 80
+    }
     
 }
 
 object arquitectoEnergia{
-    
+    method cumpleCondicionDeElite(entrenador){
+        return entrenador.estaEnSintoniaConSuEquipo()
+    }
 }
 object guiaMental{
-    
+    method cumpleCondicionDeElite(entrenador){
+        return true
+    }
 }
