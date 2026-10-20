@@ -58,6 +58,7 @@ class EquipoSintetico inherits Equipo{
     }
    
 }
+
 class EquipoEterico inherits Equipo{
     const nivelDeFluctuacionDimensional;
     const cantidadDePortalesEnergeticosAbiertos;
@@ -136,6 +137,7 @@ object arquitectoEnergia{
         return entrenador.estaEnSintoniaConSuEquipo()
     }
 }
+
 object guiaMental{
     method cumpleCondicionDeElite(entrenador){
         return true
